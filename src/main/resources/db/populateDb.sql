@@ -2,17 +2,17 @@ DELETE FROM person;
 DELETE FROM book;
 
 INSERT INTO book(title, author, year_of_publication)
-VALUES ('The Adventures of Tom Sawyer', 'Mark Twain', 2024),
-       ('Dracula', 'Bram Stoker', 2024),
-       ('The Green Mile', 'Stephen King', 2024),
-       ('The Great Gatsby', 'Francis Scott Fitzgerald', 2022),
-       ('Chocolat', 'Joanne Harris', 2022),
-       ('Death on the Nile', 'Agatha Christie', 2022),
-       ('What I Talk About When I Talk About Running', 'Murakami Haruki', 2019);
+VALUES ('Букварь', 'Жукова Надежда', 2021),
+       ('Пёс по имени Мани', 'Шефер Бодо', 1999),
+       ('Мастер и Маргарита', 'Булгаков Михаил', 1967),
+       ('Алхимик', 'Коэльо Пауло', 1988),
+       ('Три товарища', 'Ремарк Эрих Мария', 1936),
+       ('Крокодил Гена и его друзья', 'Успенский Эдуард', 1966),
+       ('Последнее желание', 'Сапковский Анджей', 1993);
 
 INSERT INTO person(full_name, year_of_birth)
-VALUES ('Ivanov Ivan Ivanovich', 1970),
-       ('Petrov Petr Petrovich', 1960),
-       ('Alekseev Aleksey Alekseevich', 1989),
-       ('Pozner Vladimir Vladimirovich', 1944),
-       ('Fedorov Miron Janovich', 1985);
+VALUES ('Ветров Николай Иванович', 1985),
+       ('Якушев Василий Петрович', 1957),
+       ('Танюшкин Виктор Борисович', 1981),
+       ('Носов Тимофей Алексеевич', 1969),
+       ('Горохов Артем Исаевич', 1941);
