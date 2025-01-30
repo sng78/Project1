@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Список людей</title>
 </head>
 <body>
 
 <div th:each="person : ${people}">
     <a th:href="@{/people/{id}(id=${person.getId()})}"
-       th:text="${person.getFullName()} + ', ' + ${person.getYearOfBirth()}">value</a>
+       th:text="${person.getFullName() + ', ' + person.getYearOfBirth()}">value</a>
 </div>
+<br>
+<hr>
+<a href="people/new">Добавить человека</a>
 
 </body>
 </html>
