@@ -1,11 +1,17 @@
 package io.github.sng78.models;
 
+import javax.validation.constraints.*;
+
 public class Person {
 
     private int id;
 
+    @Pattern(regexp = "[А-Я][а-я]+\\s[А-Я][а-я]+\\s[А-Я][а-я]+",
+            message = "Нужно ввести в формате: Фамилия Имя Отчество")
     private String fullName;
 
+    @NotNull
+    @Min(value = 1900, message = "Минимальный год рождения: 1900")
     private int yearOfBirth;
 
     public Person() {
