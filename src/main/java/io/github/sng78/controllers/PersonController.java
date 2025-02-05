@@ -2,6 +2,7 @@ package io.github.sng78.controllers;
 
 import io.github.sng78.dao.PersonDao;
 import io.github.sng78.models.Person;
+import io.github.sng78.util.PersonValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,8 +16,11 @@ public class PersonController {
 
     private final PersonDao personDao;
 
-    public PersonController(PersonDao personDao) {
+    private final PersonValidator personValidator;
+
+    public PersonController(PersonDao personDao, PersonValidator personValidator) {
         this.personDao = personDao;
+            this.personValidator = personValidator;
     }
 
     @GetMapping
@@ -38,6 +42,8 @@ public class PersonController {
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "people/new";
         }
@@ -54,6 +60,8 @@ public class PersonController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
                          @PathVariable("id") int id) {
+        personValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
