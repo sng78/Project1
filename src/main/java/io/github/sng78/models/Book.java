@@ -1,23 +1,34 @@
 package io.github.sng78.models;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Book {
 
     private int id;
 
+    @NotBlank
+    @Size(min = 1, max = 128, message = "Введите от 1 до 128 символов")
     private String title;
 
+    @NotBlank
+    @Size(min = 2, max = 128, message = "Введите от 2 до 128 символов")
     private String author;
 
-    private int year;
+    @NotNull
+    @Min(value = 1001, message = "Год должен быть больше 1000")
+    private int yearOfPublication;
 
     public Book() {
     }
 
-    public Book(int id, String title, String author, int year) {
+    public Book(int id, String title, String author, int yearOfPublication) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.year = year;
+        this.yearOfPublication = yearOfPublication;
     }
 
     public int getId() {
@@ -44,11 +55,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getYear() {
-        return year;
+    public int getYearOfPublication() {
+        return yearOfPublication;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setYearOfPublication(int yearOfPublication) {
+        this.yearOfPublication = yearOfPublication;
     }
 }

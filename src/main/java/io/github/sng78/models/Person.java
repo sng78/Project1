@@ -11,7 +11,7 @@ public class Person {
     private String fullName;
 
     @NotNull
-    @Min(value = 1900, message = "Минимальный год рождения: 1900")
+    @Min(value = 1901, message = "Год рождения должен быть больше 1900")
     private int yearOfBirth;
 
     public Person() {
