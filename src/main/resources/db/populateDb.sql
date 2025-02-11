@@ -16,3 +16,7 @@ VALUES ('Ветров Николай Иванович', 1985),
        ('Танюшкин Виктор Борисович', 1981),
        ('Носов Тимофей Алексеевич', 1969),
        ('Горохов Артем Исаевич', 1941);
+
+UPDATE book SET person_id=1 WHERE id=1;
+UPDATE book SET person_id=1 WHERE id=2;
+UPDATE book SET person_id=3 WHERE id=5;
