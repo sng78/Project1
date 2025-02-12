@@ -1,12 +1,14 @@
 package io.github.sng78.dao;
 
 import io.github.sng78.models.Book;
+import io.github.sng78.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookDao {
@@ -40,5 +42,19 @@ public class BookDao {
 
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM book WHERE id=?", id);
+    }
+
+    public Optional<Person> getOwner(int id) {
+        return jdbcTemplate.query(
+                "SELECT person.* FROM book JOIN person ON book.person_id=person.id WHERE book.id=?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
+    }
+
+    public void setBusy(int id, Person person) {
+        jdbcTemplate.update("UPDATE book SET person_id=? WHERE id=?", person.getId(), id);
+    }
+
+    public void setFree(int id) {
+        jdbcTemplate.update("UPDATE book SET person_id=NULL WHERE id=?", id);
     }
 }

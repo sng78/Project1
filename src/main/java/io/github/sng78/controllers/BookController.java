@@ -1,22 +1,27 @@
 package io.github.sng78.controllers;
 
 import io.github.sng78.dao.BookDao;
+import io.github.sng78.dao.PersonDao;
 import io.github.sng78.models.Book;
+import io.github.sng78.models.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
 
     private final BookDao bookDao;
+    private final PersonDao personDao;
 
-    public BookController(BookDao bookDao) {
+    public BookController(BookDao bookDao, PersonDao personDao) {
         this.bookDao = bookDao;
+        this.personDao = personDao;
     }
 
     @GetMapping
@@ -26,8 +31,16 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, @ModelAttribute("person") Person person, Model model) {
         model.addAttribute("book", bookDao.findById(id));
+
+        Optional<Person> owner = bookDao.getOwner(id);
+        if (owner.isPresent()) {
+            model.addAttribute("owner", owner.get());
+        } else {
+            model.addAttribute("people", personDao.findAll());
+        }
+
         return "books/show";
     }
 
@@ -65,5 +78,17 @@ public class BookController {
     public String delete(@PathVariable("id") int id) {
         bookDao.delete(id);
         return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/busy")
+    public String setBusy(@PathVariable("id") int id, @ModelAttribute("person") Person person) {
+        bookDao.setBusy(id, person);
+        return "redirect:/books/" + id;
+    }
+
+    @PatchMapping("/{id}/free")
+    public String setFree(@PathVariable("id") int id) {
+        bookDao.setFree(id);
+        return "redirect:/books/" + id;
     }
 }
