@@ -3,7 +3,7 @@
 - Цифровой учет книг в небольшой библиотеке.
 
 ***Используемые технологии:***
-- JDK 1.8, Spring MVC, JDBC Template, Hibernate Validator, Maven, Thymeleaf, HTML, Postgres
+- Java, Postgres, JDBC Template, Hibernate Validator, Spring MVC, Maven, Thymeleaf, HTML
 
 ***API***
 - /people - Страница со списком всех людей, можно добавить нового человека
